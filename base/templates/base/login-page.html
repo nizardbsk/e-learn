@@ -1,0 +1,9 @@
+<form action="" method="POST">
+    {% csrf_token %}
+    <label for="">username : </label>
+    <input type="text" name="username" placeholder="username">
+    <label for="">password : </label>
+    <input type="password" name="password" placeholder="password">
+    <input type="submit" >
+</form>
+<p>dont have an account ?,<a href="{% url 'create-account' %}"> create an acount</a></p>

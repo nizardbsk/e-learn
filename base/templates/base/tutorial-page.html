@@ -1,0 +1,22 @@
+<div class="tutorial">
+    <a href="{% url 'tutorial-page' tutorial.id %}"><h1>{{tutorial.name}}</h1></a>
+    <img src="{{tutorial.cover_url}}" alt="" style="height: 80px; width: 90px;">
+    <span>{{tutorial.price}} $</span>
+    <p>{{tutorial.description}}</p>
+</div>
+<a href="{% url 'create-video' tutorial.id %}">add a video</a>
+{% if videos %}
+{% for video in videos %}
+<div class="video">
+    <h2>{{video.title}}</h2>
+    <video width='400' controls>
+    <source src='{{video.video_url}}' type='video/mp4'>
+    Your browser does not support the video tag.
+    </video>
+</div>
+{% endfor %}
+{% else %}
+<h2>you has no videos for this tutorial</h2>
+<a href="{% url 'create-video' tutorial.id %}">add a video</a>
+{% endif %}
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpbh-mt'},{'server':'p3plmcpnl487010'},{'dcenter':'p3'},{'cp_id':'8437534'},{'cp_cache':''},{'cp_cl':'6'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script>
