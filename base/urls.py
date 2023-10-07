@@ -11,4 +11,5 @@ urlpatterns = [
     path('create-tutorial/',views.createtutorial,name='create-tutorial'),
     path('tutorial-page/<str:tutorial_id>/',views.tutorialpage,name='tutorial-page'),
     path('create-video/<str:tutorial_id>/',views.createvideo,name='create-video'),
+    path('tutorials/',views.tutorials,name='tutorials'),
 ]

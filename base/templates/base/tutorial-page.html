@@ -1,4 +1,65 @@
-<div class="tutorial">
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+<div class="tutorial-name-pic">
+    <img src="{{tutorial.cover_url}}" alt="" style="height: 180px; width: 150px;">
+    <div class="tutorial-nm-desc">
+        <h1>{{tutorial.name}}</h1>
+        <p>{{tutorial.description}}</p>
+    </div>
+</div>
+<div class="tutorial-info">
+    {% if tutorial.user != user.profile %}
+    <div class="tutorial-user" >
+        <a href=""><img src="{{tutorial.user.avatar_url}}" alt="" style="height: 80px; width: 80px; border-radius: 50%;"></a>
+        <h3 style="margin-top: 5px;">{{tutorial.user}}</h3>
+    </div>
+    {% endif %}
+    <h3 style="margin-left: 30px;">{{tutorial.video_set.count}} videos </h3>
+    <h3 style="margin-left: 30px;">{{tutorial.created|timesince}} ago</h3>
+    <h3 style="margin-left: 30px;">{{tutorial.price}} $</h3>
+</div>
+{% if tutorial.user == user.profile %}
+<a href="" class="tutorial-page-button">Add Video</a>
+<a href="" class="tutorial-page-button" style="margin-top: 10px;"> Edit Tutorial</a>
+{% else %}
+<a href="" class="tutorial-page-button">Enroll</a>
+{% endif %}
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="tutorial">
     <a href="{% url 'tutorial-page' tutorial.id %}"><h1>{{tutorial.name}}</h1></a>
     <img src="{{tutorial.cover_url}}" alt="" style="height: 80px; width: 90px;">
     <span>{{tutorial.price}} $</span>
@@ -19,4 +80,4 @@
 <h2>you has no videos for this tutorial</h2>
 <a href="{% url 'create-video' tutorial.id %}">add a video</a>
 {% endif %}
-<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpbh-mt'},{'server':'p3plmcpnl487010'},{'dcenter':'p3'},{'cp_id':'8437534'},{'cp_cache':''},{'cp_cl':'6'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script>
+<script>'undefined'=== typeof _trfq || (window._trfq = []);'undefined'=== typeof _trfd && (window._trfd=[]),_trfd.push({'tccl.baseHost':'secureserver.net'},{'ap':'cpbh-mt'},{'server':'p3plmcpnl487010'},{'dcenter':'p3'},{'cp_id':'8437534'},{'cp_cache':''},{'cp_cl':'6'}) // Monitoring performance to make your website faster. If you want to opt-out, please contact web hosting support.</script><script src='https://img1.wsimg.com/traffic-assets/js/tccl.min.js'></script> -->

@@ -1,75 +1,65 @@
-<!DOCTYPE html>
+{% extends 'base/main.html' %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Learning Website</title>
-    <link rel="stylesheet" href="{% static 'css/home2-style.css' %}">
-</head>
-<body>
-    <header class="header">
-        <div class="container">
-            <h1 class="logo">E-Learn</h1>
-            <nav class="navbar">
-                <ul class="nav-list">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Courses</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
-                    <li><a href="{% url 'profile-page' user.profile.id %}"><img src="{{user.profile.avatar_url}}" alt="" style="height: 50px;height: 50px;border-radius: 50%;"></a></li>
-                </ul>
-            </nav>
+{% block content %}
+<main>
+    <section class="get-started" style="border-bottom: 1px #a7a1a1 solid;">
+        <div class="get-started-text">
+            <h1>Welcom to E-Learning platform</h1>
+            <h3>Your best online learning platform</h3>
         </div>
-    </header>
-
-    <section class="hero">
-        <div class="container">
-            <h1>Welcome to E-Learn</h1>
-            <p>Your Path to Lifelong Learning</p>
-            <a href="{% url 'login-page' %}" class="btn">Get Started</a>
-        </div>
+        <a href="{% url 'create-tutorial' %}" class="get-started-link">Add Tutorial</a>
     </section>
-
-    <section class="recommended-tutorials">
-        <h2>Recommended Tutorials</h2>
-        <div class="container">
-            {% for tutorial in tutorials %}
-            <a href="{% url 'tutorial-page' tutorial.id %}">
-                <div class="tutorial-card">
-                    <img src="{{tutorial.cover_url}}" alt="Tutorial 1" style="width: 40px;height: 40px;">
-                    <h3>{{tutorial.name}}</h3>
-                    <p>{{tutorial.description}}</p>
-                    <a href="#" class="btn">View Tutorial</a>
+    <section class="search-section" style="border-bottom: 1px #a7a1a1 solid;padding-bottom: 10px;">
+        <input type="text" placeholder="search for tutorials" class="tutorial-search-input">
+        <button type="submit" class="tutorial-search-button"> Search</button>
+    </section>
+    <h1 style="margin-top: 50px; margin-left: 500px; font-size: 2.8rem;color: rgb(23, 52, 97);">Your Tutorials</h1>
+    <section class="tutorials" style="border-bottom: 1px #a7a1a1 solid;">
+        {% for tutorial in your_tutorials %}
+        <a href="{% url 'tutorial-page' tutorial.id %}">
+            <div class="tutorial">
+                <img class="tutorial-image" src="{{tutorial.cover_url}}" style=" height: 280px;width: 260px; "></img>
+                <div class="tutorial-details">
+                    <div class="tutorial-name">
+                        <h3>{{tutorial.name}}</h3>
+                    </div>
+                    <div class="tutorial-activity">
+                        <span>You</span>
+                        <span>{{tutorial.followers.count}}</span>
+                    </div>
                 </div>
-            </a>
-            {% endfor %}
-            
-            <!-- Add more recommended tutorials here -->
-        </div>
+            </div>
+        </a>
+        {% endfor %}
     </section>
-
-    <section class="tutorial-topics">
-        <div class="container">
-            <h2>Tutorial Topics</h2>
-            <ul class="topic-list">
-                <li><a href="#">Programming</a></li>
-                <li><a href="#">Web Development</a></li>
-                <li><a href="#">Data Science</a></li>
-                <li><a href="#">Design</a></li>
-                <li><a href="#">Mathematics</a></li>
-            </ul>
-        </div>
+    <h1 style="margin-top: 50px; margin-left: 450px; font-size: 2.8rem;color: rgb(23, 52, 97);">Recommended Tutorials</h1>
+    <section class="tutorials" style="border-bottom: 1px #a7a1a1 solid;">
+        {% for tutorial in tutorials %}
+        {% if tutorial.user != user.profile %}
+        <a href="{% url 'tutorial-page' tutorial.id %}">
+            <div class="tutorial">
+                <img class="tutorial-image" src="{{tutorial.cover_url}}" style=" height: 280px;width: 260px; "></img>
+                <div class="tutorial-details">
+                    <div class="tutorial-name">
+                        <h3>{{tutorial.name}}</h3>
+                        
+                    </div>
+                    <div class="tutorial-activity">
+                        <span>{{tutorial.user}}</span>
+                        <span>{{tutorial.price}} $</span>
+                        <span>{{tutorial.followers.count}}</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endif %}
+        {% endfor %}
     </section>
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2023 E-Learn</p>
-        </div>
-    </footer>
-</body>
-</html>
+    <section class="footer">
+        <span style="color: white;">e-learn@gmail.com</span>
+    </section>
+</main>
+{% endblock content %}
 <!-- <h3>welcome to E-learn</h3>
 <h1>hello {{user}}</h1>
 <a href="{% url 'profile-page' user.profile.id %}"> Profile Page</a>

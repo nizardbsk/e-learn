@@ -1,0 +1,29 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block content %}
+<form action="" method="GET">
+<section class="search-section" style="border-bottom: 1px #a7a1a1 solid;padding-bottom: 10px;">
+        <input type="text" placeholder="search for tutorials" class="tutorial-search-input" name="q">
+        <button type="submit" class="tutorial-search-button"> Search</button>
+</section>
+</form>
+<!-- <h1 style="margin-top: 50px; margin-left: 500px; font-size: 2.8rem;color: rgb(23, 52, 97);">Your Tutorials</h1> -->
+<section class="tutorials" style="border-bottom: 1px #a7a1a1 solid;">
+    {% for tutorial in tutorials %}
+    <a href="{% url 'tutorial-page' tutorial.id %}">
+        <div class="tutorial">
+            <img class="tutorial-image" src="{{tutorial.cover_url}}" style=" height: 280px;width: 260px; "></img>
+            <div class="tutorial-details">
+                <div class="tutorial-name">
+                    <h3>{{tutorial.name}}</h3>
+                </div>
+                <div class="tutorial-activity">
+                    <span>{{tutorial.name}}</span>
+                    <span>{{tutorial.followers.count}}</span>
+                </div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</section>
+{% endblock content %}

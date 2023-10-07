@@ -4,17 +4,21 @@ from django.db.models import Q
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponse
 from django.contrib import messages
+from django.db.models import Q
 from .models import *
 from .forms import *
 
 # Create your views here.
 def home(request):
     if request.user.is_authenticated:
-        context={'user':request.user}
+        tutorials=Tutorial.objects.all()
+        your_tutorials = Tutorial.objects.filter(user=request.user.profile)
+        context={'user':request.user,'tutorials':tutorials,'your_tutorials':your_tutorials}
         return render(request,'base/home.html',context)
     else:
         tutorials=Tutorial.objects.all()
-        context={'tutorials':tutorials}
+        user=[]
+        context={'tutorials':tutorials,'user':user}
         return render(request,'base/home2.html',context)
 def loginpage(request):
     if request.method == 'POST':
@@ -109,4 +113,10 @@ def createvideo(request,tutorial_id):
             return redirect('tutorial-page',tutorial_id)
     context={'form':form}
     return render(request,'base/add-video.html',context)
+def tutorials(request):
+    q=request.GET.get('q') if request.GET.get('q') is not None else ''
+    user=request.user
+    tutorials=Tutorial.objects.filter(Q(name__icontains=q))
+    context={'user':user,'tutorials':tutorials}
+    return render(request,'base/tutorials.html',context)
     

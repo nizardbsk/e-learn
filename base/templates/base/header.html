@@ -1,0 +1,42 @@
+{% load static %}
+<header>
+    <div class="header-container">
+        <div class="project-name">
+            <a href=""  class="project-name-link">E-Learn</a>
+        </div>
+        <div class="tags">
+            <a href="{% url 'home' %}" class="tag tag-link">
+                Home
+            </a>
+            <a href="{% url 'tutorials' %}" class="tag tag-link">
+                Courses
+            </a>
+            {% if user %}
+            <a href="" class="tag tag-link">
+                Card
+            </a>
+            {% else %}
+            <a href="" class="tag tag-link">
+                About
+            </a>
+            {% endif %}
+            <a href="" class="tag tag-link">
+                Contact
+            </a>
+            {% if user %}
+            <a href="{% url 'logout' %}" class="tag tag-link">
+                Logout
+            </a>
+            {% else %}
+            <a href="{% url 'login-page' %}" class="tag tag-link">
+                Login 
+            </a>
+            {% endif %}
+            {% if user %}
+            <a href="{% url 'profile-page' user.profile.id %}" class="tag tag-img">
+                <img src="{{user.profile.avatar_url}}" alt="" style="height: 40px; width: 40px; border-radius: 50px;">
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</header>
