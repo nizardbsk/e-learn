@@ -20,7 +20,7 @@
     <h3 style="margin-left: 30px;">{{tutorial.price}} $</h3>
 </div>
 {% if tutorial.user == user.profile %}
-<a href="" class="tutorial-page-button">Add Video</a>
+<a href="{% url 'create-video' tutorial.id %}" class="tutorial-page-button">Add Video</a>
 <a href="" class="tutorial-page-button" style="margin-top: 10px;"> Edit Tutorial</a>
 {% else %}
 <a href="" class="tutorial-page-button">Enroll</a>
